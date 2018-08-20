@@ -1,20 +1,24 @@
 package com.neo.controller;
 
-import com.neo.remote.HelloRemote;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neo.remote.HelloRemote;
+
 @RestController
 public class ConsumerController {
 
-    @Autowired
-    HelloRemote HelloRemote;
-	
-    @RequestMapping("/hello/{name}")
-    public String index(@PathVariable("name") String name) {
-        return HelloRemote.hello(name);
-    }
+	@Autowired
+	private ServerProperties serverProperties;
+	@Autowired
+	private HelloRemote HelloRemote;
+
+	@RequestMapping("/hello/{name}")
+	public String index(@PathVariable("name") String name) {
+		return "Caller: " + serverProperties.getPort() + "<br />" + HelloRemote.hello(name);
+	}
 
 }

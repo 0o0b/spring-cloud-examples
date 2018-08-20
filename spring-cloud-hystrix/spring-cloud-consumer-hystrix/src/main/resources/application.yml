@@ -1,0 +1,12 @@
+server:
+  port: ${randomMap[server.port].int[9100,9199]}
+spring:
+  application:
+    name: spring-cloud-consumer-hystrix
+feign:
+  hystrix:
+    enabled: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
